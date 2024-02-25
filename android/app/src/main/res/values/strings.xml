@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="facebook_app_id">fb_key</string>
+    <string name="facebook_client_token">fb_token</string>
+    <string name="admob_id">ca-app-pub-9384434507206491~9160843566</string>
+    <string name="google_map_id">AIzaSyCdpH9-8lzuskxelZZpGwM4v98SaYEYugI</string>
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+</resources>

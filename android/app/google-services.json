@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "459248909333",
+    "firebase_url": "https://scoutgh-ef972-default-rtdb.firebaseio.com",
+    "project_id": "scoutgh-ef972",
+    "storage_bucket": "scoutgh-ef972.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:459248909333:android:8ca0fdfca56a706a51621c",
+        "android_client_info": {
+          "package_name": "com.itdelux.scoutgh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "459248909333-m3lmq1th214f2k819nfcqkui46mcu3sp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itdelux.scoutgh",
+            "certificate_hash": "19dc62ace26e23645787676dee01b4b4396c99d1"
+          }
+        },
+        {
+          "client_id": "459248909333-i5h92upgct3hpio3qks7kasbh51ehhmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6ase9MtXBn6IlZusKfdmg4Zjnrhxz9fQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "459248909333-i5h92upgct3hpio3qks7kasbh51ehhmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
