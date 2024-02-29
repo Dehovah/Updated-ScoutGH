@@ -57,7 +57,7 @@ class _SocialLoginState extends State<SocialLogin> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         widget.hidePhoneLogin == false
             ? Container(
@@ -90,6 +90,9 @@ class _SocialLoginState extends State<SocialLogin> {
                 ))).round(10).ripple(() {
                 Get.offAll(() => const LoginScreen());
               }),
+        SizedBox(
+          width: 50,
+        ),
         Container(
             height: 40,
             width: 40,
@@ -102,6 +105,10 @@ class _SocialLoginState extends State<SocialLogin> {
             ))).round(10).ripple(() {
           signInWithGoogle();
         }),
+
+        SizedBox(
+          width: 50,
+        ),
         if (Platform.isIOS)
           Container(
               height: 40,

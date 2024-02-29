@@ -11,12 +11,14 @@ import '../../model/post_search_query.dart';
 import '../add_on/controller/reel/reels_controller.dart';
 import '../add_on/ui/reel/reels.dart';
 import '../chat/chat_detail.dart';
+import '../dashboard/dashboard_screen.dart';
 import '../dashboard/mentions.dart';
 import '../dashboard/posts.dart';
 import '../highlights/hightlights_viewer.dart';
 import '../live/gifts_list.dart';
 import '../settings_menu/settings_controller.dart';
 import 'follower_following_list.dart';
+import 'professional_details_screen.dart';
 
 class OtherUserProfile extends StatefulWidget {
   final int userId;
@@ -50,8 +52,8 @@ class OtherUserProfileState extends State<OtherUserProfile>
 
   initialLoad() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-     // if (widget.user != null) {
-       // _profileController.setUser(widget.user!);
+      // if (widget.user != null) {
+      // _profileController.setUser(widget.user!);
       //}
       _profileController.clear();
       loadData();
@@ -118,6 +120,12 @@ class OtherUserProfileState extends State<OtherUserProfile>
                     Stack(
                       children: [coverImage(), imageAndNameView()],
                     ),
+                    // BodySmallText(
+                    //   "View details",
+                    // ).vP4.ripple(() {
+                    //   Get.to(() => ProfessionalDetailsScreen());
+                    //   // openImagePickingPopup();
+                    // }),
                     const SizedBox(
                       height: 20,
                     ),
@@ -290,7 +298,7 @@ class OtherUserProfileState extends State<OtherUserProfile>
                   size: 18,
                 ),
               )).ripple(() {
-            Get.back();
+            Get.offAll(() => DashboardScreen());
           }),
           ThemeIconWidget(
             ThemeIcon.more,

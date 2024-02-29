@@ -36,14 +36,13 @@ class ChangePhoneNumberState extends State<ChangePhoneNumber> {
               height: 55,
             ),
             profileScreensNavigationBar(
-                
                 title: changePhoneNumberString.tr,
                 rightBtnTitle: doneString.tr,
                 completion: () {
                   profileController.updateMobile(
-                      countryCode: countryCode,
-                      phoneNumber: phoneNumber.text,
-                      );
+                    countryCode: countryCode,
+                    phoneNumber: phoneNumber.text,
+                  );
                 }),
             const SizedBox(
               height: 20,
@@ -51,8 +50,7 @@ class ChangePhoneNumberState extends State<ChangePhoneNumber> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BodyLargeText(phoneNumberString.tr,
-                    weight: TextWeight.medium),
+                BodyLargeText(phoneNumberString.tr, weight: TextWeight.medium),
                 const SizedBox(
                   height: 8,
                 ),
@@ -67,6 +65,7 @@ class ChangePhoneNumberState extends State<ChangePhoneNumber> {
     return SizedBox(
       height: 50,
       child: AppMobileTextField(
+        countryCodeText: countryCode,
         onChanged: (value) {},
         countryCodeValueChanged: (value) {
           countryCode = value;

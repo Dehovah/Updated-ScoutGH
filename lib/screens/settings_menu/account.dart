@@ -1,5 +1,6 @@
 import 'package:foap/helper/imports/common_import.dart';
 import 'package:foap/screens/profile/blocked_users.dart';
+import '../../controllers/profile/profile_controller.dart';
 import '../live/live_history.dart';
 import 'package:foap/helper/imports/setting_imports.dart';
 
@@ -12,6 +13,7 @@ class AppAccount extends StatefulWidget {
 
 class _AppAccountState extends State<AppAccount> {
   final SettingsController _settingsController = Get.find();
+  final ProfileController profileController = Get.find();
 
   @override
   void initState() {
@@ -37,10 +39,17 @@ class _AppAccountState extends State<AppAccount> {
                     addTileEvent(blockedUserString.tr, () {
                       Get.to(() => const BlockedUsersList());
                     }),
+
                     if (_settingsController
-                        .setting.value!.enableProfileVerification)
+                            .setting.value!.enableProfileVerification &&
+                        profileController.user.value!.profileCategoryTypeName !=
+                            "Other" &&
+                        profileController.user.value!.profileCategoryTypeName !=
+                            "User")
                       addTileEvent(requestVerificationString.tr, () {
-                        Get.to(() => const RequestVerification());
+                        Get.to(() => const RequestVerification(
+                              fromRegistration: false,
+                            ));
                       }),
                     // addTileEvent(
                     //     'assets/findFriends.png',

@@ -5,6 +5,7 @@ import '../../controllers/profile/profile_controller.dart';
 import '../../screens/club/club_detail.dart';
 import '../../screens/profile/my_profile.dart';
 import '../../screens/profile/other_user_profile.dart';
+import '../../screens/profile/professional_details_screen.dart';
 
 class PostUserInfo extends StatelessWidget {
   final PostModel post;
@@ -93,7 +94,12 @@ class PostUserInfo extends StatelessWidget {
     } else {
       _profileController.otherUserProfileView(
           refId: post.user.id, viewSource: UserViewSourceType.post);
-      Get.to(() => OtherUserProfile(userId: post.user.id, user: post.user));
+      if (_profileController.user.value!.profileCategoryTypeName == "Scout") {
+        Get.to(() =>
+            ProfessionalDetailsScreen(userId: post.user.id, user: post.user));
+      } else {
+        Get.to(() => OtherUserProfile(userId: post.user.id, user: post.user));
+      }
     }
   }
 

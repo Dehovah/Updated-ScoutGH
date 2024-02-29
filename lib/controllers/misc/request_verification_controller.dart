@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'dart:io';
 import 'dart:async';
 import '../../api_handler/apis/misc_api.dart';
+import '../../screens/dashboard/dashboard_screen.dart';
 
 class RequestVerificationController extends GetxController {
   RxList<VerificationRequest> verificationRequests =
@@ -15,7 +16,6 @@ class RequestVerificationController extends GetxController {
   Rx<TextEditingController> documentType = TextEditingController().obs;
 
   RxList<File> selectedImages = <File>[].obs;
-
   bool get isVerificationInProcess {
     return verificationRequests
         .where((request) => request.isProcessing == true)
@@ -58,7 +58,7 @@ class RequestVerificationController extends GetxController {
     selectedImages.clear();
   }
 
-  getVerificationRequests() {
+  getVerificationRequests() async {
     ProfileApi.getVerificationRequestHistory(resultCallback: (result) {
       verificationRequests.value = result;
       verificationRequests.refresh();
@@ -119,9 +119,9 @@ class RequestVerificationController extends GetxController {
               message: verificationRequestSentString.tr, isSuccess: true);
 
           clear();
-          Timer(const Duration(seconds: 2), () {
-            Get.back();
-          });
+          // Timer(const Duration(seconds: 2), () {
+          //   Get.offAll(() => DashboardScreen());
+          // });
         });
   }
 

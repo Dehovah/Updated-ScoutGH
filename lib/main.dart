@@ -37,7 +37,6 @@ import 'package:foap/util/shared_prefs.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_callkit_incoming/flutter_callkit_incoming.dart';
 import 'package:overlay_support/overlay_support.dart';
-
 import 'components/post_card_controller.dart';
 import 'controllers/misc/gift_controller.dart';
 import 'controllers/misc/misc_controller.dart';
@@ -90,9 +89,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   DeviceInfoManager.collectDeviceInfo();
-
   String? token = await FlutterCallkitIncoming.getDevicePushTokenVoIP();
   if (token != null) {
     SharedPrefs().setVoipToken(token);
@@ -100,11 +97,9 @@ Future<void> main() async {
 
   DeepLinkManager.init();
   AutoOrientation.portraitAutoMode();
-
   isDarkMode = await SharedPrefs().isDarkMode();
   Get.changeThemeMode(isDarkMode ? ThemeMode.dark : ThemeMode.light);
   // Get.changeThemeMode(ThemeMode.dark);
-
   Get.put(PlayerManager());
   Get.put(UsersController());
   Get.put(EventsController());
@@ -152,7 +147,6 @@ Future<void> main() async {
   Get.put(CheckoutController());
   Get.put(CameraControllerService());
   Get.put(HighlightsController());
-
   setupServiceLocator();
 
   final UserProfileManager userProfileManager = Get.find();
@@ -160,11 +154,8 @@ Future<void> main() async {
 
   final SettingsController settingsController = Get.find();
   await settingsController.getSettings();
-
   NotificationManager().initialize();
-
   await getIt<RealmDBManager>().openDatabase();
-
   if (userProfileManager.isLogin == true) {
     AuthApi.updateFcmToken();
   }

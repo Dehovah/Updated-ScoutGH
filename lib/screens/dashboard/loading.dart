@@ -14,7 +14,6 @@ import 'dashboard_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
-
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
 }
@@ -24,7 +23,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   final SubscriptionPackageController packageController = Get.find();
 
   final RequestVerificationController _requestVerificationController =
-      RequestVerificationController();
+      Get.find();
 
   final ProfileController _profileController = Get.find();
   late bool haveBiometricLogin = false;
@@ -36,10 +35,30 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
   }
 
+  Future _checkUserStatus() async {
+    if (_profileController.user.value!.profileCategoryTypeName == "Other") {
+      Get.to(() => const SetProfileCategoryType(isFromSignup: false));
+    } else if (_profileController.user.value!.profileCategoryTypeName !=
+        "User") {
+      // print("Processing");
+      // print(_requestVerificationController.verificationRequests.value);
+      // print(_requestVerificationController.isVerificationInProcess);
+      // print(_requestVerificationController.isApproved);
+      if (_requestVerificationController.verificationRequests.isEmpty) {
+        Get.to(() => const RequestVerification(
+              fromRegistration: false,
+            ));
+      }
+    } else {
+      Get.offAll(() => const DashboardScreen());
+    }
+  }
+
   openNextScreen() async {
     if (_userProfileManager.isLogin == true) {
       await _profileController.getMyProfile();
       await _requestVerificationController.getVerificationRequests();
+      // await _checkUserStatus();
       packageController.initiate();
       Get.offAll(() => const DashboardScreen());
       getIt<SocketManager>().connect();
@@ -59,7 +78,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (bioMetricAuthStatus == true) {
       List<BiometricType> availableBiometrics =
           await localAuth.getAvailableBiometrics();
-
       if (availableBiometrics.contains(BiometricType.face)) {
         // Face ID.
         bioMetricType.value = 1;

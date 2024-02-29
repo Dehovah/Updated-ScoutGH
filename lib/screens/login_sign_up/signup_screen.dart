@@ -17,7 +17,6 @@ class SignUpScreenState extends State<SignUpScreen> {
   TextEditingController password = TextEditingController();
   SettingsController settingsController = Get.find();
   final ProfileController profileController = Get.find();
-
   String countryCode = '+233';
   final LoginController loginController = Get.find();
 

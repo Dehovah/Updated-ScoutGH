@@ -321,24 +321,26 @@ class UpdateProfileState extends State<UpdateProfile> {
                   //   });
                   // }),
                   // divider().vP16,
-                  Row(
-                    children: [
-                      BodyLargeText(professionalString.tr,
-                          weight: TextWeight.medium),
-                      const Spacer(),
-                      ThemeIconWidget(
-                        ThemeIcon.edit,
-                        color: AppColorConstants.iconColor,
-                        size: 15,
-                      )
-                    ],
-                  ).ripple(() {
-                    Get.to(() => const AddProfessionalDetails(
-                            isSettingProfile: false))!
-                        .then((value) {
-                      reloadData();
-                    });
-                  }),
+                  if (profileController.user.value!.profileCategoryTypeName ==
+                      "Athletes")
+                    Row(
+                      children: [
+                        BodyLargeText(professionalString.tr,
+                            weight: TextWeight.medium),
+                        const Spacer(),
+                        ThemeIconWidget(
+                          ThemeIcon.edit,
+                          color: AppColorConstants.iconColor,
+                          size: 15,
+                        )
+                      ],
+                    ).ripple(() {
+                      Get.to(() => const AddProfessionalDetails(
+                              isSettingProfile: false))!
+                          .then((value) {
+                        reloadData();
+                      });
+                    }),
                   divider().vP16,
                 ],
               ).hp(DesignConstants.horizontalPadding),

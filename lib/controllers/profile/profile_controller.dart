@@ -86,7 +86,7 @@ class ProfileController extends GetxController {
     reels.clear();
   }
 
-  getMyProfile() async {
+  Future getMyProfile() async {
     await _userProfileManager.refreshProfile();
     user.value = _userProfileManager.user.value!;
     update();
@@ -262,7 +262,9 @@ class ProfileController extends GetxController {
             isLoginFirstTime = false;
             getIt<LocationManager>().postLocation();
             if (profileCategoryType.name != "User") {
-              Get.to(() => RequestVerification());
+              Get.to(() => RequestVerification(
+                    fromRegistration: true,
+                  ));
             } else {
               Get.offAll(() => const DashboardScreen());
             }
@@ -409,8 +411,7 @@ class ProfileController extends GetxController {
     user.followingStatus =
         user.isPrivate ? FollowingStatus.requested : FollowingStatus.following;
     update();
-    UsersApi.followUnfollowUser(isFollowing: true, user: user)
-        .then((value) {
+    UsersApi.followUnfollowUser(isFollowing: true, user: user).then((value) {
       update();
     });
   }
@@ -419,8 +420,7 @@ class ProfileController extends GetxController {
     user.followingStatus = FollowingStatus.notFollowing;
 
     update();
-    UsersApi.followUnfollowUser(isFollowing: false, user: user)
-        .then((value) {
+    UsersApi.followUnfollowUser(isFollowing: false, user: user).then((value) {
       update();
     });
   }

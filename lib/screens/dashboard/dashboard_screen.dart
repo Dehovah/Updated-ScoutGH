@@ -55,15 +55,18 @@ class DashboardState extends State<DashboardScreen> {
       // print(_requestVerificationController.verificationRequests.value);
       // print(_requestVerificationController.isVerificationInProcess);
       // print(_requestVerificationController.isApproved);
-      if (!_requestVerificationController.isVerificationInProcess &&
-          !_requestVerificationController.isApproved) {
-        Get.to(() => const RequestVerification());
+      if (_requestVerificationController.isVerificationInProcess == false &&
+          _requestVerificationController.isApproved == false) {
+        Get.to(() => const RequestVerification(
+              fromRegistration: false,
+            ));
       }
     }
   }
 
   @override
   void initState() {
+    // _checkUserStatus();
     isAnyPageInStack = true;
 
     widgets = [
@@ -77,7 +80,9 @@ class DashboardState extends State<DashboardScreen> {
         showBack: false,
       ),
     ];
-
+    // Future.delayed(Duration(seconds: 20), () {
+    //   _checkUserStatus();
+    // });
     super.initState();
   }
 

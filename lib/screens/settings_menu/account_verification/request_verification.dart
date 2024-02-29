@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:foap/helper/imports/common_import.dart';
 import 'package:foap/helper/imports/setting_imports.dart';
+import 'package:foap/screens/dashboard/dashboard_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../controllers/misc/request_verification_controller.dart';
+import '../../add_on/ui/dating/profile/add_profesional_details.dart';
 
 class RequestVerification extends StatefulWidget {
-  const RequestVerification({super.key});
+  final bool fromRegistration;
+  const RequestVerification({required this.fromRegistration, super.key});
 
   @override
   State<RequestVerification> createState() => _RequestVerificationState();
@@ -14,7 +17,7 @@ class RequestVerification extends StatefulWidget {
 class _RequestVerificationState extends State<RequestVerification> {
   final UserProfileManager _userProfileManager = Get.find();
   final RequestVerificationController _requestVerificationController =
-      RequestVerificationController();
+      Get.find();
   final picker = ImagePicker();
 
   @override
@@ -38,8 +41,7 @@ class _RequestVerificationState extends State<RequestVerification> {
                     children: [
                       backNavigationBarWithTrailingWidget(
                         title: requestVerificationString.tr,
-                        widget: ThemeIconWidget(ThemeIcon.bookMark)
-                            .ripple(() {
+                        widget: ThemeIconWidget(ThemeIcon.bookMark).ripple(() {
                           if (_requestVerificationController
                               .verificationRequests.isNotEmpty) {
                             Get.to(() => const RequestVerificationList());
@@ -149,6 +151,18 @@ class _RequestVerificationState extends State<RequestVerification> {
         const SizedBox(
           height: 300,
         ),
+        widget.fromRegistration == true
+            ? AppThemeButton(
+                text: "Continue",
+                onPress: () {
+                  Get.to(() =>
+                      const AddProfessionalDetails(isSettingProfile: true));
+                })
+            : AppThemeButton(
+                text: "Continue",
+                onPress: () {
+                  Get.offAll(() => const DashboardScreen());
+                }),
       ],
     );
   }
@@ -213,8 +227,7 @@ class _RequestVerificationState extends State<RequestVerification> {
                         onChanged: (String value) {
                           if (value == scoutLicenseString.tr) {
                             _requestVerificationController
-                                .setSelectedDocumentType(
-                                scoutLicenseString.tr);
+                                .setSelectedDocumentType(scoutLicenseString.tr);
                           } else if (value == passportString.tr) {
                             _requestVerificationController
                                 .setSelectedDocumentType(passportString.tr);
@@ -278,9 +291,7 @@ class _RequestVerificationState extends State<RequestVerification> {
                                   top: 5,
                                   child: Container(
                                     color: AppColorConstants.themeColor,
-                                    child:
-                                        ThemeIconWidget(ThemeIcon.delete)
-                                            .p4,
+                                    child: ThemeIconWidget(ThemeIcon.delete).p4,
                                   ).circular.ripple(() {
                                     _requestVerificationController
                                         .deleteDocument(

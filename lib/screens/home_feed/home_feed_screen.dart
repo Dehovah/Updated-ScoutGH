@@ -36,7 +36,7 @@ class HomeFeedState extends State<HomeFeedScreen> {
   final AgoraLiveController _agoraLiveController = Get.find();
 
   final RequestVerificationController _requestVerificationController =
-      RequestVerificationController();
+      Get.find();
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
   final SettingsController _settingsController = Get.find();
@@ -57,7 +57,9 @@ class HomeFeedState extends State<HomeFeedScreen> {
       // print(_requestVerificationController.isApproved);
       if (_requestVerificationController.isVerificationInProcess == false &&
           _requestVerificationController.isApproved == false) {
-        Get.to(() => const RequestVerification());
+        Get.to(() => const RequestVerification(
+              fromRegistration: false,
+            ));
       }
     }
   }
@@ -72,9 +74,9 @@ class HomeFeedState extends State<HomeFeedScreen> {
       _homeController.loadQuickLinksAccordingToSettings();
     });
     _requestVerificationController.getVerificationRequests();
-    Future.delayed(Duration(seconds: 15), () {
-      _checkUserStatus();
-    });
+    // Future.delayed(Duration(seconds: 15), () {
+    //   _checkUserStatus();
+    // });
     setState(() {});
   }
 
@@ -128,68 +130,102 @@ class HomeFeedState extends State<HomeFeedScreen> {
             const SizedBox(
               height: 55,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Heading3Text(
-                  AppConfigConstants.appName,
-                  weight: TextWeight.semiBold,
-                  color: AppColorConstants.themeColor,
-                ),
-                const Spacer(),
-                           //       if (_profileController.user.value!.profileCategoryTypeName !=
-                        //  "User" &&
-                     // _profileController.user.value!.isVerified)
-                SizedBox(
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Heading5Text(
+                    AppConfigConstants.appName,
+                    weight: TextWeight.semiBold,
+                    color: AppColorConstants.themeColor,
+                  ),
+                  const Spacer(),
+                  if (_profileController.user.value!.profileCategoryTypeName !=
+                          "User" &&
+                      _profileController.user.value!.profileCategoryTypeName !=
+                          "Other")
+                    SizedBox(
+                        height: 35,
+                        width: 35,
+                        child: ThemeIconWidget(
+                          ThemeIcon.plus,
+                          size: 25,
+                        )).ripple(() {
+                      if (_profileController.user.value!.isVerified) {
+                        Future.delayed(
+                          Duration.zero,
+                          () => showGeneralDialog(
+                              context: context,
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      //  AddPostScreen(
+                                      //   postType: PostType.basic,
+                                      //   postCompletionHandler: () {},
+                                      // )
+                                      const ContentCreatorView()),
+                        );
+                      } else if (_requestVerificationController
+                          .isVerificationInProcess) {
+                        Get.showSnackbar(GetSnackBar(
+                            duration: Duration(seconds: 2),
+                            isDismissible: true,
+                            // title: "Verification required",
+                            message:
+                                "Your account is being verified.You can only post after your account has been verified"));
+                      } else {
+                        AppUtil.showVerificationRequiredAlert(
+                            action: "Verify",
+                            title: "Verification Required",
+                            subTitle: "Only verified users are allowed to post",
+                            okHandler: () {
+                              Get.to(() =>
+                                  RequestVerification(fromRegistration: false));
+                            },
+                            cancelHandler: () {
+                              Get.back();
+                            });
+                        // Get.showSnackbar(GetSnackBar(
+                        //     duration: Duration(seconds: 2),
+                        //     isDismissible: true,
+                        //     title: "Verification required",
+                        //     message: "Only verified accounts make post"));
+                        // AppUtil.showToast(
+                        //     message: "Only verified accounts can make a post",
+                        //     isSuccess: false);
+                      }
+                    }),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  SizedBox(
                     height: 35,
                     width: 35,
-                    child: ThemeIconWidget(
-                      ThemeIcon.plus,
-                      size: 25,
-                    )).ripple(() {
-                  Future.delayed(
-                    Duration.zero,
-                    () => showGeneralDialog(
-                        context: context,
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            //  AddPostScreen(
-                            //   postType: PostType.basic,
-                            //   postCompletionHandler: () {},
-                            // )
-                            const ContentCreatorView()),
-                  );
-                }),
-                const SizedBox(
-                  width: 20,
-                ),
-                SizedBox(
-                  height: 35,
-                  width: 35,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ThemeIconWidget(
-                        ThemeIcon.chat,
-                        size: 25,
-                      ).ripple(() {
-                        Get.to(() => const ChatHistory());
-                      }),
-                      Obx(() => _dashboardController.unreadMsgCount.value == 0
-                          ? Container()
-                          : Positioned(
-                              top: 0,
-                              right: 5,
-                              child: Container(
-                                color: AppColorConstants.red,
-                                height: 10,
-                                width: 10,
-                              ).circular,
-                            ))
-                    ],
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        ThemeIconWidget(
+                          ThemeIcon.chat,
+                          size: 25,
+                        ).ripple(() {
+                          Get.to(() => const ChatHistory());
+                        }),
+                        Obx(() => _dashboardController.unreadMsgCount.value == 0
+                            ? Container()
+                            : Positioned(
+                                top: 0,
+                                right: 5,
+                                child: Container(
+                                  color: AppColorConstants.red,
+                                  height: 10,
+                                  width: 10,
+                                ).circular,
+                              ))
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ).hp(20),
+                ],
+              ).hp(20),
+            ),
             const SizedBox(
               height: 20,
             ),

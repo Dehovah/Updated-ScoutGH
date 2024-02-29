@@ -1,5 +1,6 @@
 import 'package:foap/screens/add_on/controller/dating/dating_controller.dart';
 import 'package:foap/helper/imports/common_import.dart';
+import 'package:foap/screens/dashboard/dashboard_screen.dart';
 import '../../../model/preference_model.dart';
 import '../dating_dashboard.dart';
 
@@ -60,17 +61,17 @@ class AddProfessionalDetailsState extends State<AddProfessionalDetails> {
                     addProfessionalDetailString.tr,
                   ).vP25,
                   AppTextField(
-                    label: qualificationString.tr,
-                    hintText: 'Master in computer',
+                    label: "Sports played",
+                    hintText: 'Football, Basketball ...',
                     controller: qualificationController,
                   ).bP25,
                   AppTextField(
-                    hintText: 'Entrepreneur',
-                    label: occupationString.tr,
+                    hintText: 'Striker, Defence ...',
+                    label: 'Position played',
                     controller: occupationController,
                   ).bP25,
                   BodySmallText(
-                    workExperienceString.tr,
+                    'Playing since',
                   ).bP8,
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,12 +131,13 @@ class AddProfessionalDetailsState extends State<AddProfessionalDetails> {
                                 experienceYearController.text.isNotEmpty) {
                               datingController.updateDatingProfile(dataModel,
                                   () {
-                                if (widget.isSettingProfile) {
-                                  Get.close(7);
-                                  Get.to(() => const DatingDashboard());
-                                } else {
-                                  Get.back();
-                                }
+                                Get.to(() => const DashboardScreen());
+                                // if (widget.isSettingProfile) {
+                                //   Get.close(7);
+                                //   Get.to(() => const DatingDashboard());
+                                // } else {
+                                //   Get.back();
+                                // }
                               });
                             }
                           })),

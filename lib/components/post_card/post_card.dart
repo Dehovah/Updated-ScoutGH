@@ -54,8 +54,7 @@ import 'offer_post_tile.dart';
 class PostMediaTile extends StatelessWidget {
   final PostCardController postCardController = Get.find();
   final HomeController homeController = Get.find();
-
-  final  ProfileController _profileController = Get.find();
+  final ProfileController _profileController = Get.find();
   final PostModel model;
   final bool isSharedPostMedia;
 
@@ -752,30 +751,30 @@ class PostCardState extends State<PostCard> {
                   FractionallySizedBox(heightFactor: 0.95, child: sharePost()));
         }),
       //if (!widget.model.isMyPost && widget.model.user.role != UserRole.admin)
-       // Row(
-        //  children: [
-        //    ThemeIconWidget(
-         //     ThemeIcon.gift,
-          //    size: 15,
-         //   ),
-         //   const SizedBox(
-          //    width: 5,
-         //   ),
-         //   BodyMediumText(giftString)
-         // ],
-        //).ripple(() {
-         // showModalBottomSheet<void>(
-         //     context: context,
-          //    builder: (BuildContext context) {
-           //     return FractionallySizedBox(
-            //        heightFactor: 0.8,
-            //        child: GiftsPageView(giftSelectedCompletion: (gift) {
-             //         Get.back();
-              //        homeController.sendPostGift(
-              //            gift, widget.model.user.id, widget.model.id);
-               //       Get.back();
-               //     }));
-             // });
+      // Row(
+      //  children: [
+      //    ThemeIconWidget(
+      //     ThemeIcon.gift,
+      //    size: 15,
+      //   ),
+      //   const SizedBox(
+      //    width: 5,
+      //   ),
+      //   BodyMediumText(giftString)
+      // ],
+      //).ripple(() {
+      // showModalBottomSheet<void>(
+      //     context: context,
+      //    builder: (BuildContext context) {
+      //     return FractionallySizedBox(
+      //        heightFactor: 0.8,
+      //        child: GiftsPageView(giftSelectedCompletion: (gift) {
+      //         Get.back();
+      //        homeController.sendPostGift(
+      //            gift, widget.model.user.id, widget.model.id);
+      //       Get.back();
+      //     }));
+      // });
       //  }),
       if (widget.model.contentType == PostContentType.event)
         Row(
@@ -893,22 +892,22 @@ class PostCardState extends State<PostCard> {
       if (widget.model.contentType == PostContentType.classified)
         if (widget.model.product?.isSold != true &&
             widget.model.product?.isDeleted != true)
-        Row(
-          children: [
-            ThemeIconWidget(
-              ThemeIcon.cart,
-              size: 15,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            BodyMediumText(buyString.tr)
-          ],
-        ).ripple(() {
-          Get.to(() => AdDetailScreen(
-                widget.model.product!,
-              ));
-        }),
+          Row(
+            children: [
+              ThemeIconWidget(
+                ThemeIcon.cart,
+                size: 15,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              BodyMediumText(buyString.tr)
+            ],
+          ).ripple(() {
+            Get.to(() => AdDetailScreen(
+                  widget.model.product!,
+                ));
+          }),
       if (widget.model.contentType == PostContentType.donation)
         Row(
           children: [

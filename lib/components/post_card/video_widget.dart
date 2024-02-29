@@ -9,12 +9,10 @@ bool isMute = false;
 class VideoPostTile extends StatefulWidget {
   final PostGallery? media;
   final double width;
-
   final String url;
   final bool isLocalFile;
   final bool play;
   final VoidCallback onTapActionHandler;
-
   const VideoPostTile(
       {Key? key,
       this.media,
@@ -32,7 +30,6 @@ class VideoPostTile extends StatefulWidget {
 class _VideoPostTileState extends State<VideoPostTile> {
   late Future<void> initializeVideoPlayerFuture;
   VideoPlayerController? videoPlayerController;
-
   // bool isPlayed = false;
   late bool playVideo;
 
@@ -94,11 +91,12 @@ class _VideoPostTileState extends State<VideoPostTile> {
                     controller: ChewieController(
                       videoPlayerController: videoPlayerController!,
                       aspectRatio: videoPlayerController!.value.aspectRatio,
-                      showControls: false,
+                      showControls: true,
                       autoInitialize: true,
                       looping: false,
                       autoPlay: false,
                       allowMuting: true,
+                      allowFullScreen: false,
                       placeholder: widget.media != null
                           ? CachedNetworkImage(
                               imageUrl: widget.media!.thumbnail,

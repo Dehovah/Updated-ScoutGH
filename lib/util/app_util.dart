@@ -115,6 +115,71 @@ class AppUtil {
     );
   }
 
+  static void showVerificationRequiredAlert(
+      {required String title,
+      required String action,
+      required String subTitle,
+      required VoidCallback okHandler,
+      required VoidCallback cancelHandler}) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: Get.context!,
+      builder: (context) => Container(
+        height: 220,
+        width: Get.width,
+        color: AppColorConstants.backgroundColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Heading3Text(
+              title,
+              color: AppColorConstants.themeColor,
+              weight: TextWeight.bold,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            BodyLargeText(
+              subTitle,
+              weight: TextWeight.regular,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: [
+                Wrap(
+                  spacing: 20,
+                  children: [
+                    BodyLargeText(
+                      action,
+                      color: Colors.white,
+                    )
+                        .makeChip(backGroundColor: AppColorConstants.themeColor)
+                        .ripple(() {
+                      Get.back(closeOverlays: true);
+                      okHandler();
+                    }),
+                    BodyLargeText(
+                      cancelString,
+                      color: Colors.white,
+                    )
+                        .makeChip(backGroundColor: AppColorConstants.red)
+                        .ripple(() {
+                      cancelHandler();
+                      Get.back(closeOverlays: true);
+                    }),
+                  ],
+                ),
+              ],
+            )
+          ],
+        ).hp(DesignConstants.horizontalPadding),
+      ).topRounded(20),
+    );
+  }
+
   static void showTermsAndConditionConfirmationAlert(
       {required String title,
       required String subTitle,
