@@ -5,6 +5,7 @@ import 'package:foap/screens/dashboard/dashboard_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../controllers/misc/request_verification_controller.dart';
 import '../../add_on/ui/dating/profile/add_profesional_details.dart';
+import '../../profile/update_profile.dart';
 
 class RequestVerification extends StatefulWidget {
   final bool fromRegistration;
@@ -152,12 +153,25 @@ class _RequestVerificationState extends State<RequestVerification> {
           height: 300,
         ),
         widget.fromRegistration == true
-            ? AppThemeButton(
-                text: "Continue",
-                onPress: () {
-                  Get.to(() =>
-                      const AddProfessionalDetails(isSettingProfile: true));
-                })
+            ? Column(
+                children: [
+                  AppThemeButton(
+                      text: "Continue to edit profile",
+                      onPress: () {
+                        Get.to(() => UpdateProfile(
+                              fromRegistration: true,
+                            ));
+                      }),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  AppThemeButton(
+                      text: "Skip",
+                      onPress: () {
+                        Get.offAll(() => const DashboardScreen());
+                      }),
+                ],
+              )
             : AppThemeButton(
                 text: "Continue",
                 onPress: () {

@@ -543,32 +543,32 @@ class PostCardState extends State<PostCard> {
             removePostHandler: widget.removePostHandler,
             blockUserHandler: widget.blockUserHandler,
           ),
-          if (widget.model.isMyPost)
-            Container(
-              color: AppColorConstants.cardColor.darken(),
-              height: 50,
-              width: double.infinity,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BodyLargeText(
-                    viewInsightsString.tr,
-                    weight: TextWeight.semiBold,
-                  ).ripple(() {
-                    Get.to(() => ViewPostInsights(post: widget.model));
-                  }),
-                  // AppThemeButton(
-                  //     text: boostPost.tr,
-                  //     cornerRadius: 5,
-                  //     height: 36,
-                  //     // width: 80,
-                  //     onPress: () {
-                  //       _promotionController.setPromotingPost(widget.model);
-                  //       Get.to(() => PostPromotionScreen());
-                  //     })
-                ],
-              ).hp(DesignConstants.horizontalPadding),
-            ),
+          // if (widget.model.isMyPost)
+          //   Container(
+          //     color: AppColorConstants.cardColor.darken(),
+          //     height: 50,
+          //     width: double.infinity,
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         BodyLargeText(
+          //           viewInsightsString.tr,
+          //           weight: TextWeight.semiBold,
+          //         ).ripple(() {
+          //           Get.to(() => ViewPostInsights(post: widget.model));
+          //         }),
+          //         // AppThemeButton(
+          //         //     text: boostPost.tr,
+          //         //     cornerRadius: 5,
+          //         //     height: 36,
+          //         //     // width: 80,
+          //         //     onPress: () {
+          //         //       _promotionController.setPromotingPost(widget.model);
+          //         //       Get.to(() => PostPromotionScreen());
+          //         //     })
+          //       ],
+          //     ).hp(DesignConstants.horizontalPadding),
+          //   ),
           const SizedBox(
             height: 20,
           ),

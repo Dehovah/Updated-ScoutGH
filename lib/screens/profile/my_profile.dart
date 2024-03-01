@@ -160,7 +160,7 @@ class MyProfileState extends State<MyProfile> {
                                   height: 40,
                                   text: editProfileString.tr,
                                   onPress: () {
-                                    Get.to(() => const UpdateProfile())!
+                                    Get.to(() => UpdateProfile())!
                                         .then((value) {
                                       loadData();
                                     });

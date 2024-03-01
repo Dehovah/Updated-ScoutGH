@@ -84,28 +84,32 @@ class _ExploreState extends State<Explore> {
                     right: DesignConstants.horizontalPadding,
                     top: 25),
                 Expanded(
-                    child: DefaultTabController(
-                        length: segments.length,
-                        child: Obx(() => exploreController.searchText.isNotEmpty
-                            ? Column(
-                                children: [
-                                  SMTabBar(tabs: segments, canScroll: true),
-                                  Expanded(
-                                    child: TabBarView(children: [
-                                      PostList(
-                                        postSource: PostSource.posts,
-                                      ),
-                                      UsersList(),
-                                      HashTagsList(),
-                                      EventsList(),
-                                      ClubListing(),
-                                    ]),
-                                  )
-                                ],
-                              )
-                            : QuickLinkWidget(
-                                callback: () {},
-                              )))),
+                  child: DefaultTabController(
+                    length: segments.length,
+                    child: Obx(
+                      () => exploreController.searchText.isNotEmpty
+                          ? Column(
+                              children: [
+                                SMTabBar(tabs: segments, canScroll: true),
+                                Expanded(
+                                  child: TabBarView(children: [
+                                    // PostList(
+                                    //   postSource: PostSource.posts,
+                                    // ),
+                                    UsersList(),
+                                    HashTagsList(),
+                                    EventsList(),
+                                    ClubListing(),
+                                  ]),
+                                )
+                              ],
+                            )
+                          : QuickLinkWidget(
+                              callback: () {},
+                            ),
+                    ),
+                  ),
+                ),
               ],
             )),
       ),

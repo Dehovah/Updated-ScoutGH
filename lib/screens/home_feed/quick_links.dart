@@ -137,10 +137,12 @@ class _QuickLinkWidgetState extends State<QuickLinkWidget> {
                       //     message: pleaseAllowAccessToCameraForLiveString.tr,
                       //     isSuccess: false);
                     });
-                  } else if (link.linkType == QuickLinkType.story) {
-                    openStoryUploader();
-                    //Get.to(() => const ChooseMediaForStory());
-                  } else if (link.linkType == QuickLinkType.highlights) {
+                  }
+                  // else if (link.linkType == QuickLinkType.story) {
+                  //   openStoryUploader();
+                  //   //Get.to(() => const ChooseMediaForStory());
+                  // }
+                  else if (link.linkType == QuickLinkType.highlights) {
                     Get.to(() => const ChooseStoryForHighlights());
                   } else if (link.linkType == QuickLinkType.tv) {
                     Get.to(() => const TvDashboardScreen());

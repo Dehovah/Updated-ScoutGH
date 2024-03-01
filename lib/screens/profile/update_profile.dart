@@ -1,11 +1,13 @@
 import 'package:foap/helper/imports/common_import.dart';
 import 'package:foap/helper/imports/profile_imports.dart';
 import 'package:foap/screens/add_on/ui/dating/profile/add_interests.dart';
+import 'package:foap/screens/dashboard/dashboard_screen.dart';
 import 'package:foap/screens/login_sign_up/set_profile_category_type.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UpdateProfile extends StatefulWidget {
-  const UpdateProfile({super.key});
+  bool? fromRegistration;
+  UpdateProfile({this.fromRegistration, super.key});
 
   @override
   UpdateProfileState createState() => UpdateProfileState();
@@ -35,7 +37,15 @@ class UpdateProfileState extends State<UpdateProfile> {
       backgroundColor: AppColorConstants.backgroundColor,
       body: Column(
         children: [
-          backNavigationBar(title: ''),
+          customNavigationBar(
+              title: '',
+              action: () {
+                if (widget.fromRegistration == true) {
+                  Get.offAll(() => const DashboardScreen());
+                } else {
+                  Get.back();
+                }
+              }),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

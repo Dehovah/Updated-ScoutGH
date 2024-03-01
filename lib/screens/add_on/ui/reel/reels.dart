@@ -20,11 +20,12 @@ class _ReelsState extends State<Reels> {
   void initState() {
     super.initState();
     _reelsController.getReels();
+    // _profileController.getMyProfile();
   }
 
   @override
   void dispose() {
-    _reelsController.clearReels();
+    // _reelsController.clearReels();
     super.dispose();
   }
 
@@ -87,17 +88,17 @@ class _ReelsState extends State<Reels> {
                                   .user.value!.profileCategoryTypeName !=
                               "User" &&
                           _profileController.user.value!.isVerified)
-                      Container(
-                        height: 40,
-                        width: 40,
-                        color: AppColorConstants.themeColor.withOpacity(0.5),
-                        child: ThemeIconWidget(
-                          ThemeIcon.camera,
-                          color: Colors.white,
-                        ).ripple(() {
-                          Get.to(() => const CreateReelScreen());
-                        }),
-                      ).circular,
+                        Container(
+                          height: 40,
+                          width: 40,
+                          color: AppColorConstants.themeColor.withOpacity(0.5),
+                          child: ThemeIconWidget(
+                            ThemeIcon.camera,
+                            color: Colors.white,
+                          ).ripple(() {
+                            Get.to(() => const CreateReelScreen());
+                          }),
+                        ).circular,
                     ],
                   ))
             ],
